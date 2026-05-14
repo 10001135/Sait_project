@@ -21,9 +21,9 @@
                   placeholder="Обычный текст"></textarea>
         {% endif %}
         <div>
-            <button type="submit" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">→</button>
+            <button type="submit" name="crypt" value="encrypt" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">→</button>
             <br>
-            <button type="submit" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">←</button>
+            <button type="submit" name="crypt" value="decrypt" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">←</button>
         </div>
         {% if text_output != 0 %}
         <textarea style="display: inline-block; margin-left: 50px" id="outputt" name="output" rows="4" cols="50"
