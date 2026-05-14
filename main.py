@@ -1,12 +1,14 @@
-from flask import Flask, render_template, redirect, request, abort
+from flask import Flask, render_template, redirect, request, abort, url_for
 from sqlalchemy.sql.functions import current_user
 
 from forms.user import RegisterForm, LoginForm
 from forms.news import NewsForm
-from flask_login import LoginManager, login_user. login_required, logout_user, current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.news import News
 from data.users import User
 from data import db_session
+
+from Sifrovka import Encrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -37,6 +39,15 @@ def index():
     return render_template("index.html", news=news)
 
 
+@app.route("/shifr", methods=['POST', 'GET'])
+def shifr():
+    if request.method == 'POST':
+        shifrs = request.form.getlist('shifr_choose')
+        output = Encrypt.caesar_encrypt(request.form['input'], 2)
+        return render_template("make_shifr.html", text_input=request.form['input'], text_output=output, shifrs=shifrs)
+
+    return render_template("make_shifr.html")
+
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -60,7 +71,7 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-@app.route('/news',  methods=['GET', 'POST'])
+@app.route('/news', methods=['GET', 'POST'])
 @login_required
 def add_news():
     form = NewsForm()

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>Шифрование</title>
+<script src="../static/js/script.js"></script>
+<h1 style="margin-bottom: 100px;">Шифрование</h1>
+
+<form action="" method="post">
+    <div class="input-group mb-3">
+        <div id="shifrFields">
+        </div>
+        <button type="button" class="btn btn-outline-dark" onclick="javascript:return addShifr()">+</button>
+    </div>
+
+    <div class="input-group">
+        {% if text_input != 0 %}
+        <textarea style="display: inline-block; margin-right: 50px" id="inputt" name="input" rows="4" cols="50"
+                  placeholder="Обычный текст">{{text_input}}</textarea>
+        {% else %}
+        <textarea style="display: inline-block; margin-right: 50px" id="input" name="input" rows="4" cols="50"
+                  placeholder="Обычный текст"></textarea>
+        {% endif %}
+        <div>
+            <button type="submit" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">→</button>
+            <br>
+            <button type="submit" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">←</button>
+        </div>
+        {% if text_output != 0 %}
+        <textarea style="display: inline-block; margin-left: 50px" id="outputt" name="output" rows="4" cols="50"
+                  placeholder="Зашифрованный текст">{{text_output}}</textarea>
+        {% else %}
+        <textarea style="display: inline-block; margin-left: 50px" id="output" name="output" rows="4" cols="50"
+                  placeholder="Зашифрованный текст"></textarea>
+        {% endif %}
+    </div>
+</form>
+{% for shifr in shifrs%}
+    <script>addShifr(choose="{{shifr}}")</script>
+{% endfor %}
+{% endblock %}
