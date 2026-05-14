@@ -4,7 +4,8 @@ dict_shifrs =
 {
     "0": "Удалить",
     "caesar": "Цезарь",
-    "morse": "Морзе"
+    "morse": "Морзе",
+    "atbash": "Атбаш"
 }
 
 function caesar_shift(shifr)
