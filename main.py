@@ -43,11 +43,35 @@ def index():
 @app.route("/shifr", methods=['POST', 'GET'])
 def shifr():
     if request.method == 'POST':
-        shifrs = request.form.getlist('shifr_choose')
-        output = Encrypt.caesar_encrypt(request.form['input'], 2)
-        return render_template("make_shifr.html", text_input=request.form['input'], text_output=output, shifrs=shifrs)
+        if request.form['crypt'] == "encrypt":
+            shifrs = request.form.getlist('shifr_choose')
+            caesar = request.form.getlist('caesar')
+            input = request.form['input']
+            output = input
+            for shifr_f in shifrs:
+                if shifr_f == 'caesar':
+                    output = encrypt_dict[shifr_f](output, int(caesar[0]))
+                    caesar.pop(0)
+                else:
+                    output = encrypt_dict[shifr_f](output)
+            return render_template("make_shifr.html", text_input=input, text_output=output, shifrs=shifrs)
+        else:
+            shifrs = list(reversed(request.form.getlist('shifr_choose')))
+            caesar = list(reversed(request.form.getlist('caesar')))
+            output = request.form['output']
+            input = output
+            print(shifrs)
+            for shifr_f in shifrs:
+                if shifr_f == 'caesar':
+                    input = decrypt_dict[shifr_f](output, int(caesar[0]))
+                    caesar.pop(0)
+                else:
+                    input = decrypt_dict[shifr_f](output)
+            return render_template("make_shifr.html", text_input=input, text_output=output,
+                                   shifrs=list(reversed(shifrs)))
 
     return render_template("make_shifr.html")
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
