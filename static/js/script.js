@@ -12,6 +12,7 @@ function caesar_shift(shifr)
 {
     numberElement = document.createElement("input");
     numberElement.setAttribute('type', "number");
+     numberElement.setAttribute('class', "number_caesar");
     numberElement.setAttribute('name', "caesar");
     numberElement.setAttribute('min', "0");
     numberElement.setAttribute('max', "100");
