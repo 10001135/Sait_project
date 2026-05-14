@@ -1,3 +1,7 @@
-.form-select {
+.form-select, .number_caesar {
     min-height: 40px;
+}
+
+.number_caesar {
+    max-width: 40px;
 }

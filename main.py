@@ -60,6 +60,7 @@ def shifr():
             caesar = list(reversed(request.form.getlist('caesar')))
             output = request.form['output']
             input = output
+            print(shifrs)
             for shifr_f in shifrs:
                 if shifr_f == 'caesar':
                     input = decrypt_dict[shifr_f](output, int(caesar[0]))
