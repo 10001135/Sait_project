@@ -12,7 +12,7 @@ function caesar_shift(shifr)
 {
     numberElement = document.createElement("input");
     numberElement.setAttribute('type', "number");
-    numberElement.setAttribute('name', "shift");
+    numberElement.setAttribute('name', "caesar");
     numberElement.setAttribute('min', "0");
     numberElement.setAttribute('max', "100");
     numberElement.setAttribute('step', "1");
@@ -76,11 +76,7 @@ function onchangeShifr(selector)
     }
     else
     {
-        listChild = shifr.getElementsByTagName("input");
-        while (listChild.length > 0)
-        {
-            listChild[0].remove();
-        }
+        listChild = shifr.querySelectorAll('[name="caesar"]').forEach(element => element.remove());
     }
     return false;
 }
