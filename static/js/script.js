@@ -8,20 +8,19 @@ dict_shifrs =
     "atbash": "Атбаш"
 }
 
-function caesar_shift(shifr, shift)
+function caesar_shift(shifr)
 {
     numberElement = document.createElement("input");
     numberElement.setAttribute('type', "number");
-     numberElement.setAttribute('class', "number_caesar");
     numberElement.setAttribute('name', "caesar");
     numberElement.setAttribute('min', "0");
     numberElement.setAttribute('max', "100");
     numberElement.setAttribute('step', "1");
-    numberElement.setAttribute('value', shift);
+    numberElement.setAttribute('value', "1");
     shifr.appendChild(numberElement);
 }
 
-function addShifr(choose="morse", shift="1")
+function addShifr(choose="morse", not_first_b = true)
 {
     const shifrFields = document.getElementById('shifrFields');
     const lastShifr = shifrFields.lastElementChild;
@@ -47,7 +46,7 @@ function addShifr(choose="morse", shift="1")
 
     if (choose == "caesar")
     {
-        caesar_shift(newShifr, shift);
+        caesar_shift(newShifr);
     }
 
     if (lastShifr == null)
@@ -71,11 +70,13 @@ function onchangeShifr(selector)
       return false
     }
 
-    listChild = shifr.querySelectorAll('[name="caesar"]').forEach(element => element.remove());
-
-    if (selector.value == "caesar")
+    else if (selector.value == "caesar")
     {
-      caesar_shift(shifr, 1);
+      caesar_shift(shifr);
+    }
+    else
+    {
+        listChild = shifr.querySelectorAll('[name="caesar"]').forEach(element => element.remove());
     }
     return false;
 }
