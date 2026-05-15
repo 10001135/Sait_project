@@ -46,31 +46,32 @@ def shifr():
         if request.form['crypt'] == "encrypt":
             shifrs = request.form.getlist('shifr_choose')
             caesar = request.form.getlist('caesar')
+            caesar_p = list(caesar)
             input = request.form['input']
             output = input
             for shifr_f in shifrs:
                 if shifr_f == 'caesar':
-                    output = encrypt_dict[shifr_f](output, int(caesar[0]))
-                    caesar.pop(0)
+                    output = encrypt_dict[shifr_f](output, int(caesar_p[0]))
+                    caesar_p.pop(0)
                 else:
                     output = encrypt_dict[shifr_f](output)
-            return render_template("make_shifr.html", text_input=input, text_output=output, shifrs=shifrs)
+            return render_template("make_shifr.html", text_input=input, text_output=output, shifrs=shifrs, caesars=caesar, caesar_b=1)
         else:
             shifrs = list(reversed(request.form.getlist('shifr_choose')))
             caesar = list(reversed(request.form.getlist('caesar')))
+            caesar_p = list(caesar)
             output = request.form['output']
             input = output
-            print(shifrs)
             for shifr_f in shifrs:
                 if shifr_f == 'caesar':
-                    input = decrypt_dict[shifr_f](output, int(caesar[0]))
-                    caesar.pop(0)
+                    input = decrypt_dict[shifr_f](input, int(caesar_p[0]))
+                    caesar_p.pop(0)
                 else:
-                    input = decrypt_dict[shifr_f](output)
+                    input = decrypt_dict[shifr_f](input)
             return render_template("make_shifr.html", text_input=input, text_output=output,
-                                   shifrs=list(reversed(shifrs)))
+                                   shifrs=list(reversed(shifrs)), caesars=list(reversed(caesar)), caesar_b=1)
 
-    return render_template("make_shifr.html")
+    return render_template("make_shifr.html", caesar_b=0)
 
 
 @app.route('/register', methods=['GET', 'POST'])

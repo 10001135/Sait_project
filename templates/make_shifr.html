@@ -21,9 +21,13 @@
                   placeholder="Обычный текст"></textarea>
         {% endif %}
         <div>
-            <button type="submit" name="crypt" value="encrypt" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">→</button>
+            <button type="submit" name="crypt" value="encrypt" class="btn btn-outline-dark"
+                    style="max-height: 2em; font-size: 20pt;">→
+            </button>
             <br>
-            <button type="submit" name="crypt" value="decrypt" class="btn btn-outline-dark" style="max-height: 2em; font-size: 20pt;">←</button>
+            <button type="submit" name="crypt" value="decrypt" class="btn btn-outline-dark"
+                    style="max-height: 2em; font-size: 20pt;">←
+            </button>
         </div>
         {% if text_output != 0 %}
         <textarea style="display: inline-block; margin-left: 50px" id="outputt" name="output" rows="4" cols="50"
@@ -34,7 +38,13 @@
         {% endif %}
     </div>
 </form>
-{% for shifr in shifrs%}
+{%  set caes = caesars %}
+{% for shifr in shifrs %}
+{% if shifr == "caesar" and caesar_b == 1%}
+    <script>addShifr(choose="{{shifr}}", shift="{{caes[0]}}")</script>
+{% set temp = caes.pop(0) %}
+{% else %}
     <script>addShifr(choose="{{shifr}}")</script>
+{% endif %}
 {% endfor %}
 {% endblock %}
