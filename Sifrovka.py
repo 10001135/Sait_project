@@ -79,6 +79,24 @@ def morse_encode(text: str) -> str:
     return ' '.join(MORSE.get(char, char) for char in text)
 
 
+def vigenere_encrypt_rus(text, key):
+    text = text.lower()
+    key = key.lower()
+    al = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+    text_shif = []
+    key_index = 0
+    for char in text:
+        if char in al:
+            char_pos = al.index(char)
+            key_pos = al.index(key[key_index % len(key)])
+            encrypted_pos = (char_pos + key_pos) % len(al)
+            text_shif.append(al[encrypted_pos])
+            key_index += 1
+        else:
+            text_shif.append(char)
+    return ''.join(text_shif)
+
+
 encrypt_dict = {
     'morse': morse_encode,
     'caesar': caesar_encrypt,
