@@ -10,3 +10,13 @@ html, body {
     background-color: rgb(176, 187, 227) !important;
     min-height: 100%;
 }
+
+.btn-danger{
+    background-color: rgb(199, 176, 227);
+    border-color: rgb(174, 141, 216)
+}
+
+.btn-warning{
+    background-color: rgb(176, 202, 227);
+    border-color: rgb(151, 182, 211)
+}

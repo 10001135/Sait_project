@@ -39,10 +39,14 @@
     </div>
 </form>
 {%  set caes = caesars %}
+{%  set vige = vigeneres %}
 {% for shifr in shifrs %}
 {% if shifr == "caesar" and caesar_b == 1%}
     <script>addShifr(choose="{{shifr}}", shift="{{caes[0]}}")</script>
 {% set temp = caes.pop(0) %}
+{% elif shifr == "vigenere" and vigenere_b == 1%}
+    <script>addShifr(choose="{{shifr}}", key="{{vige[0]}}")</script>
+{% set temp = vige.pop(0) %}
 {% else %}
     <script>addShifr(choose="{{shifr}}")</script>
 {% endif %}

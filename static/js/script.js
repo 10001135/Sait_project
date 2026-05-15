@@ -5,7 +5,8 @@ dict_shifrs =
     "0": "Удалить",
     "caesar": "Цезарь",
     "morse": "Морзе",
-    "atbash": "Атбаш"
+    "atbash": "Атбаш",
+    "vigenere": "Виженер"
 }
 
 function caesar_shift(shifr, shift)
@@ -21,7 +22,18 @@ function caesar_shift(shifr, shift)
     shifr.appendChild(numberElement);
 }
 
-function addShifr(choose="morse", shift="1")
+function vigenere_key(shifr, key)
+{
+    numberElement = document.createElement("input");
+    numberElement.setAttribute('type', "text");
+    numberElement.setAttribute('class', "vigenere_key");
+    numberElement.setAttribute('name', "vigenere");
+    numberElement.setAttribute('placeholde', "Ключ");
+    numberElement.setAttribute("value", key);
+    shifr.appendChild(numberElement);
+}
+
+function addShifr(choose="morse", shift="1", key="key")
 {
     const shifrFields = document.getElementById('shifrFields');
     const lastShifr = shifrFields.lastElementChild;
@@ -50,6 +62,11 @@ function addShifr(choose="morse", shift="1")
         caesar_shift(newShifr, shift);
     }
 
+    if (choose == "vigenere")
+    {
+        vigenere_key(newShifr, key);
+    }
+
     if (lastShifr == null)
     {
         newShifr.id = 0;
@@ -72,10 +89,16 @@ function onchangeShifr(selector)
     }
 
     listChild = shifr.querySelectorAll('[name="caesar"]').forEach(element => element.remove());
+    listChild = shifr.querySelectorAll('[name="vigenere"]').forEach(element => element.remove());
 
     if (selector.value == "caesar")
     {
       caesar_shift(shifr, 1);
+    }
+
+    if (selector.value == "vigenere")
+    {
+      vigenere_key(shifr, "key");
     }
     return false;
 }

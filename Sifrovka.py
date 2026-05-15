@@ -105,5 +105,6 @@ def vigenere_encrypt(text, key):
 encrypt_dict = {
     'morse': morse_encode,
     'caesar': caesar_encrypt,
-    'atbash': atbash_encrypt
+    'atbash': atbash_encrypt,
+    'vigenere': vigenere_encrypt
 }

@@ -111,5 +111,6 @@ def vigenere_decrypt(text, key):
 decrypt_dict = {
     'morse': morse_decode,
     'caesar': caesar_decrypt,
-    'atbash': atbash_decrypt
+    'atbash': atbash_decrypt,
+    'vigenere': vigenere_decrypt
 }

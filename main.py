@@ -47,31 +47,43 @@ def shifr():
             shifrs = request.form.getlist('shifr_choose')
             caesar = request.form.getlist('caesar')
             caesar_p = list(caesar)
+            vigenere = request.form.getlist('vigenere')
+            vigenere_p = list(vigenere)
             input = request.form['input']
             output = input
             for shifr_f in shifrs:
                 if shifr_f == 'caesar':
                     output = encrypt_dict[shifr_f](output, int(caesar_p[0]))
                     caesar_p.pop(0)
+                elif shifr_f == 'vigenere':
+                    output = encrypt_dict[shifr_f](output, str(vigenere_p[0]))
+                    vigenere_p.pop(0)
                 else:
                     output = encrypt_dict[shifr_f](output)
-            return render_template("make_shifr.html", text_input=input, text_output=output, shifrs=shifrs, caesars=caesar, caesar_b=1)
+            return render_template("make_shifr.html", text_input=input, text_output=output, shifrs=shifrs,
+                                   caesars=caesar, caesar_b=1, vigeneres=vigenere, vigenere_b=1)
         else:
             shifrs = list(reversed(request.form.getlist('shifr_choose')))
             caesar = list(reversed(request.form.getlist('caesar')))
             caesar_p = list(caesar)
+            vigenere = list(reversed(request.form.getlist('vigenere')))
+            vigenere_p = list(vigenere)
             output = request.form['output']
             input = output
             for shifr_f in shifrs:
                 if shifr_f == 'caesar':
                     input = decrypt_dict[shifr_f](input, int(caesar_p[0]))
                     caesar_p.pop(0)
+                elif shifr_f == 'vigenere':
+                    input = decrypt_dict[shifr_f](input, str(vigenere_p[0]))
+                    vigenere_p.pop(0)
                 else:
                     input = decrypt_dict[shifr_f](input)
             return render_template("make_shifr.html", text_input=input, text_output=output,
-                                   shifrs=list(reversed(shifrs)), caesars=list(reversed(caesar)), caesar_b=1)
+                                   shifrs=list(reversed(shifrs)), caesars=list(reversed(caesar)), caesar_b=1,
+                                   vigeneres=list(reversed(vigenere)), vigenere_b=1)
 
-    return render_template("make_shifr.html", caesar_b=0)
+    return render_template("make_shifr.html", caesar_b=0, vigenere_b=0)
 
 
 @app.route('/register', methods=['GET', 'POST'])
