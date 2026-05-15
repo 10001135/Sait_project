@@ -1,6 +1,5 @@
 import base64
 
-
 MORSE = {
     'а': '.-', 'б': '-...', 'в': '.--', 'г': '--.', 'д': '-..', 'е': '.',
     'ё': '.', 'ж': '...-', 'з': '--..', 'и': '..', 'й': '.---', 'к': '-.-',
@@ -36,8 +35,10 @@ def caesar_decrypt(text: str, shift: int) -> str:
             result.append(char)
     return ''.join(result)
 
+
 def base64_decode(self, text: str) -> str:
     return base64.b64decode(text.encode('utf-8')).decode('utf-8').lower()
+
 
 def morse_decode(text: str) -> str:
     result = []
@@ -48,11 +49,13 @@ def morse_decode(text: str) -> str:
             result.append(code)
     return ''.join(result).lower()
 
+
 def xor_decrypt(self, text: str, key: str) -> str:
     text = text.lower()
     key = key.lower()
     key = key * (len(text) // len(key)) + key[:len(text) % len(key)]
     return ''.join(chr(ord(c) ^ ord(k)) for c, k in zip(text, key)).lower()
+
 
 def atbash_decrypt(text: str) -> str:
     text = text.lower()
@@ -66,6 +69,7 @@ def atbash_decrypt(text: str) -> str:
             result.append(char)
     return ''.join(result)
 
+
 def rot13_decrypt(self, text: str) -> str:
     text = text.lower()
     result = []
@@ -76,6 +80,29 @@ def rot13_decrypt(self, text: str) -> str:
             else:
                 base = ord(char)
             result.append(chr((base - ord('а') + 13) % 33 + ord('а')))
+        else:
+            result.append(char)
+    return ''.join(result)
+
+
+def vigenere_decrypt(text, key):
+    text = text.lower()
+    key = key.lower()
+    result = []
+    key_index = 0
+    for char in text:
+        if char in ABC_RU:
+            char_pos = ABC_RU.index(char)
+            key_pos = ABC_RU.index(key[key_index % len(key)])
+            decrypted_pos = (char_pos - key_pos) % len(ABC_RU)
+            result.append(ABC_RU[decrypted_pos])
+            key_index += 1
+        elif char in ABC_ENG:
+            char_pos = ABC_ENG.index(char)
+            key_pos = ABC_ENG.index(key[key_index % len(key)])
+            decrypted_pos = (char_pos - key_pos) % len(ABC_ENG)
+            result.append(ABC_ENG[decrypted_pos])
+            key_index += 1
         else:
             result.append(char)
     return ''.join(result)
