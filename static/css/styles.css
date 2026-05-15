@@ -5,3 +5,8 @@
 .number_caesar {
     max-width: 40px;
 }
+
+html, body {
+    background-color: rgb(176, 187, 227) !important;
+    min-height: 100%;
+}
